@@ -9,6 +9,7 @@ namespace Trivia
         private readonly List<Player> _players = new List<Player>();
 
         private static readonly int nbplayer = 6;
+        private static readonly int nbquestion = 50;
         private static readonly int nbMinPlayer = 2;
 
         private readonly int[] _places = new int[nbplayer];
@@ -26,20 +27,20 @@ namespace Trivia
 
         public Game()
         {
-            for (var i = 0; i < 50; i++)
+            for (var i = 0; i < nbquestion; i++)
             {
-                _popQuestions.AddLast("Pop Question " + i);
-                _scienceQuestions.AddLast(("Science Question " + i));
-                _sportsQuestions.AddLast(("Sports Question " + i));
-                _rockQuestions.AddLast(CreateRockQuestion(i));
+                _popQuestions.AddLast(CreateQuestion("Pop", i));
+                _scienceQuestions.AddLast((CreateQuestion("Science", i)));
+                _sportsQuestions.AddLast((CreateQuestion("Sports", i)));
+                _rockQuestions.AddLast(CreateQuestion("Rock", i));
             }
             string s = "";
             Player p = new Player("nom");
         }
 
-        public string CreateRockQuestion(int index)
+        public string CreateQuestion(string questionType, int questionNumber)
         {
-            return "Rock Question " + index;
+            return questionType + "Question " + questionNumber;
         }
 
         public bool IsPlayable()
