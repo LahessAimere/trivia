@@ -5,6 +5,7 @@ public class Player
     string name;
     int place = 0;
     int purse = 0;
+    bool inPenaltyBox = false;
 
     public Player(String name)
     {
@@ -40,5 +41,11 @@ public class Player
     {
         get{ return purse; }
         set { purse = value; }
+    }
+
+    public bool InPenaltyBox
+    {
+        get { return inPenaltyBox; }
+        set { inPenaltyBox = value; }
     }
 }
