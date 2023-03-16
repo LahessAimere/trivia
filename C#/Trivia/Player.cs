@@ -20,4 +20,11 @@ public class Player
             }
         }
     }
+
+	Player nextPlayer;
+	public Player Nextplayer
+    {
+        get { return Nextplayer}
+        set { nextPlayer = value}
+    }
 }
