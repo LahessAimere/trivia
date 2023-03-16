@@ -12,6 +12,7 @@ public class Player
         this.name = name;
     }
 
+    //the name of the player
     public string Name
     {
         get { return name; }
@@ -24,6 +25,7 @@ public class Player
         }
     }
 
+    //switch to Next Player
     Player nextPlayer;
     public Player Nextplayer
     {
@@ -31,18 +33,21 @@ public class Player
         set { nextPlayer = value}
     }
 
+    //the number of places in the game
     public int Place
     {
         get { return place; }
         set { place = value; }
     }
 
+    //the number of points
     public int Purse
     {
         get{ return purse; }
         set { purse = value; }
     }
 
+    //the number of players in penalty
     public bool InPenaltyBox
     {
         get { return inPenaltyBox; }
