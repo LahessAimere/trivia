@@ -6,10 +6,13 @@ namespace Trivia
 {
     public class Game
     {
-        private readonly List<string> _players = new List<string>();
+        private readonly List<Player> _players = new List<Player>();
 
-        private readonly int[] _places = new int[6];
-        private readonly int[] _purses = new int[6];
+        private static readonly int nbplayer = 6;
+        private static readonly int nbMinPlayer = 2;
+
+        private readonly int[] _places = new int[nbplayer];
+        private readonly int[] _purses = new int[nbplayer];
 
         private readonly bool[] _inPenaltyBox = new bool[6];
 
@@ -30,6 +33,8 @@ namespace Trivia
                 _sportsQuestions.AddLast(("Sports Question " + i));
                 _rockQuestions.AddLast(CreateRockQuestion(i));
             }
+            string s = "";
+            Player p = new Player("nom");
         }
 
         public string CreateRockQuestion(int index)
@@ -39,15 +44,13 @@ namespace Trivia
 
         public bool IsPlayable()
         {
-            return (HowManyPlayers() >= 2);
+            return (HowManyPlayers() >= nbMinPlayer);
         }
 
         public bool Add(string playerName)
         {
-            _players.Add(playerName);
-            _places[HowManyPlayers()] = 0;
-            _purses[HowManyPlayers()] = 0;
-            _inPenaltyBox[HowManyPlayers()] = false;
+            Player p = new Player(playerName);
+            _players.Add(p);
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + _players.Count);
