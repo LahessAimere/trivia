@@ -3,6 +3,7 @@
 public class Player
 {
 	string name;
+    int place = 0;
 
 	public Player (String name)
 	{
@@ -26,5 +27,11 @@ public class Player
     {
         get { return Nextplayer}
         set { nextPlayer = value}
+    }
+
+    public int Place
+    {
+        get { return place; }
+        set { place = value; }
     }
 }
