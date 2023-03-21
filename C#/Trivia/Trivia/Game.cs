@@ -6,14 +6,10 @@ namespace Trivia
 {
     public class Game
     {
-        private readonly List<Player> _players = new List<Player>();
+        private readonly List<string> _players = new List<string>();
 
-        private static readonly int nbplayer = 6;
-        private static readonly int nbquestion = 50;
-        private static readonly int nbMinPlayer = 2;
-
-        private readonly int[] _places = new int[nbplayer];
-        private readonly int[] _purses = new int[nbplayer];
+        private readonly int[] _places = new int[6];
+        private readonly int[] _purses = new int[6];
 
         private readonly bool[] _inPenaltyBox = new bool[6];
 
@@ -27,31 +23,31 @@ namespace Trivia
 
         public Game()
         {
-            for (var i = 0; i < nbquestion; i++)
+            for (var i = 0; i < 50; i++)
             {
-                _popQuestions.AddLast(CreateQuestion("Pop", i));
-                _scienceQuestions.AddLast((CreateQuestion("Science", i)));
-                _sportsQuestions.AddLast((CreateQuestion("Sports", i)));
-                _rockQuestions.AddLast(CreateQuestion("Rock", i));
+                _popQuestions.AddLast("Pop Question " + i);
+                _scienceQuestions.AddLast(("Science Question " + i));
+                _sportsQuestions.AddLast(("Sports Question " + i));
+                _rockQuestions.AddLast(CreateRockQuestion(i));
             }
-            string s = "";
-            Player p = new Player("nom");
         }
 
-        public string CreateQuestion(string questionType, int questionNumber)
+        public string CreateRockQuestion(int index)
         {
-            return questionType + "Question " + questionNumber;
+            return "Rock Question " + index;
         }
 
         public bool IsPlayable()
         {
-            return (HowManyPlayers() >= nbMinPlayer);
+            return (HowManyPlayers() >= 2);
         }
 
         public bool Add(string playerName)
         {
-            Player p = new Player(playerName);
-            _players.Add(p);
+            _players.Add(playerName);
+            _places[HowManyPlayers()] = 0;
+            _purses[HowManyPlayers()] = 0;
+            _inPenaltyBox[HowManyPlayers()] = false;
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + _players.Count);

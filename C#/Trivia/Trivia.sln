@@ -1,16 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33328.57
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trivia", "Trivia\Trivia.csproj", "{973FF3F8-58E8-4C72-B228-A47E04CADEBA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trivia", "Trivia\Trivia.csproj", "{973FF3F8-58E8-4C72-B228-A47E04CADEBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{7304DA09-262C-40EE-BC81-2B75746BD20E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC23086F-551E-4787-99EF-41ABB52D013C}"
-	ProjectSection(SolutionItems) = preProject
-		Player.cs = Player.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7304DA09-262C-40EE-BC81-2B75746BD20E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +15,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{973FF3F8-58E8-4C72-B228-A47E04CADEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -46,11 +44,5 @@ Global
 		{7304DA09-262C-40EE-BC81-2B75746BD20E}.Release|x64.Build.0 = Release|Any CPU
 		{7304DA09-262C-40EE-BC81-2B75746BD20E}.Release|x86.ActiveCfg = Release|Any CPU
 		{7304DA09-262C-40EE-BC81-2B75746BD20E}.Release|x86.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1CCD678D-010A-47CF-A82E-28CEBA72A19E}
 	EndGlobalSection
 EndGlobal
