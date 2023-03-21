@@ -1,6 +1,5 @@
-Legacy Code Retreat code base
-======
+TRIVIA
 
-Use this code base to run your own [Legacy Code Retreat](http://legacycoderetreat.jbrains.ca).
-
-As of this writing, there isn't really a single place to get all the information you might want about Legacy Code Retreat. Search the web and ask your colleagues. Most importantly, don't panic! If you've been to Code Retreat even once, then you know most of what you need to run a Legacy Code Retreat. Give it a try!
+Trivia is a 2 player multiplayer game.
+Players choose their name and then have to answer questions, they can also create questions with the answer of their choice.
+They win coins and if they do not respond correctly they are penalized and must wait for the next game.
