@@ -6,62 +6,73 @@ namespace Trivia
 {
     public class Game
     {
-        private readonly List<string> _players = new List<string>();
+        // Crée une liste pour les joueurs
+        private readonly List<Player> _player = new List<Player>();
 
-        private readonly int[] _places = new int[6];
-        private readonly int[] _purses = new int[6];
+        // Nombre de joueurs maximum, nombre de questions et nombre de joueurs minimum pour commencer le jeu
+        private static readonly int nbplayer = 6;
+        private static readonly int nbquestion = 50;
+        private static readonly int nbMinPlayer = 2;
 
+        // Crée des tableaux pour les places et les purses de chaque joueur
+        private readonly int[] _places = new int[nbplayer];
+        private readonly int[] _purses = new int[nbplayer];
+
+        // Crée un tableau pour les joueurs qui on une penalité
         private readonly bool[] _inPenaltyBox = new bool[6];
 
+        // Crée des listes pour les questions dans chaque catégorie
         private readonly LinkedList<string> _popQuestions = new LinkedList<string>();
         private readonly LinkedList<string> _scienceQuestions = new LinkedList<string>();
         private readonly LinkedList<string> _sportsQuestions = new LinkedList<string>();
         private readonly LinkedList<string> _rockQuestions = new LinkedList<string>();
 
+        // Numéro du joueur et s'il y n'a plus de pénalité
         private int _currentPlayer;
         private bool _isGettingOutOfPenaltyBox;
 
+
+
         public Game()
         {
-            for (var i = 0; i < 50; i++)
+            // Pour chaque question, ajouter une question à chaque liste
+            for (var i = 0; i < nbquestion; i++)
             {
-                _popQuestions.AddLast("Pop Question " + i);
-                _scienceQuestions.AddLast(("Science Question " + i));
-                _sportsQuestions.AddLast(("Sports Question " + i));
-                _rockQuestions.AddLast(CreateRockQuestion(i));
+                _popQuestions.AddLast(CreateQuestion("Pop",i));
+                _scienceQuestions.AddLast((CreateQuestion("science",i)));
+                _sportsQuestions.AddLast((CreateQuestion ("Sports", i)));
+                _rockQuestions.AddLast(CreateQuestion("Rock", i));
             }
+            string s = "";
+            Player p = new Player("nom");
         }
 
-        public string CreateRockQuestion(int index)
+        // Crée une question pour une catégorie donnée et un numéro de question donné
+        private string CreateQuestion(string questionType, int questionNumber)
         {
-            return "Rock Question " + index;
+            return questionType + " Question " + questionNumber;
         }
 
+        // Vérifie si le jeu est jouable en fonction du nombre de joueurs
         public bool IsPlayable()
         {
-            return (HowManyPlayers() >= 2);
+            return _player.Count >= nbMinPlayer;
         }
 
+        // Ajoute un joueur à la liste des joueurs
         public bool Add(string playerName)
         {
-            _players.Add(playerName);
-            _places[HowManyPlayers()] = 0;
-            _purses[HowManyPlayers()] = 0;
-            _inPenaltyBox[HowManyPlayers()] = false;
-
+            Player p = new Player(playerName);
+            _player.Add(p);
             Console.WriteLine(playerName + " was added");
-            Console.WriteLine("They are player number " + _players.Count);
+            Console.WriteLine("They are player number " + _player.Count);
             return true;
         }
 
-        public int HowManyPlayers()
-        {
-            return _players.Count;
-        }
-
+        // Effectue un lancé de dés pour le joueur
         public void Roll(int roll)
         {
-            Console.WriteLine(_players[_currentPlayer] + " is the current player");
+            Console.WriteLine(_player[_currentPlayer] + " is the current player");
             Console.WriteLine("They have rolled a " + roll);
 
             if (_inPenaltyBox[_currentPlayer])
@@ -70,11 +81,11 @@ namespace Trivia
                 {
                     _isGettingOutOfPenaltyBox = true;
 
-                    Console.WriteLine(_players[_currentPlayer] + " is getting out of the penalty box");
+                    Console.WriteLine(_player[_currentPlayer] + " is getting out of the penalty box");
                     _places[_currentPlayer] = _places[_currentPlayer] + roll;
                     if (_places[_currentPlayer] > 11) _places[_currentPlayer] = _places[_currentPlayer] - 12;
 
-                    Console.WriteLine(_players[_currentPlayer]
+                    Console.WriteLine(_player[_currentPlayer]
                             + "'s new location is "
                             + _places[_currentPlayer]);
                     Console.WriteLine("The category is " + CurrentCategory());
@@ -82,7 +93,7 @@ namespace Trivia
                 }
                 else
                 {
-                    Console.WriteLine(_players[_currentPlayer] + " is not getting out of the penalty box");
+                    Console.WriteLine(_player[_currentPlayer] + " is not getting out of the penalty box");
                     _isGettingOutOfPenaltyBox = false;
                 }
             }
@@ -91,7 +102,7 @@ namespace Trivia
                 _places[_currentPlayer] = _places[_currentPlayer] + roll;
                 if (_places[_currentPlayer] > 11) _places[_currentPlayer] = _places[_currentPlayer] - 12;
 
-                Console.WriteLine(_players[_currentPlayer]
+                Console.WriteLine(_player[_currentPlayer]
                         + "'s new location is "
                         + _places[_currentPlayer]);
                 Console.WriteLine("The category is " + CurrentCategory());
@@ -99,30 +110,35 @@ namespace Trivia
             }
         }
 
+        //Permet de poser une question en fonction de la catégorie actuelle du joueur
         private void AskQuestion()
         {
-            if (CurrentCategory() == "Pop")
+
+            switch (CurrentCategory())
             {
-                Console.WriteLine(_popQuestions.First());
-                _popQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Science")
-            {
-                Console.WriteLine(_scienceQuestions.First());
-                _scienceQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Sports")
-            {
-                Console.WriteLine(_sportsQuestions.First());
-                _sportsQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Rock")
-            {
-                Console.WriteLine(_rockQuestions.First());
-                _rockQuestions.RemoveFirst();
+                case "Pop":
+                    Console.WriteLine(_popQuestions.First());
+                    _popQuestions.RemoveFirst();
+                    break;
+                case "Science":
+                    Console.WriteLine(_scienceQuestions.First());
+                    _scienceQuestions.RemoveFirst();
+                    break;
+                case "Sports":
+                    Console.WriteLine(_sportsQuestions.First());
+                    _sportsQuestions.RemoveFirst();
+                    break;
+                case "Rock":
+                    Console.WriteLine(_rockQuestions.First());
+                    _rockQuestions.RemoveFirst();
+                    break;
+                default:
+                    Console.WriteLine("Unknown category.");
+                    break;
             }
         }
 
+        //Permet de déterminer la catégorie actuelle du joueur en fonction de sa position sur le plateau de jeu
         private string CurrentCategory()
         {
             if (_places[_currentPlayer] == 0) return "Pop";
@@ -137,6 +153,7 @@ namespace Trivia
             return "Rock";
         }
 
+        //Si le joueur est dans la case "Penalty Box", il vérifie s'il est autorisé à sortir. Si oui, il attribue une pièce d'or
         public bool WasCorrectlyAnswered()
         {
             if (_inPenaltyBox[_currentPlayer])
@@ -145,21 +162,21 @@ namespace Trivia
                 {
                     Console.WriteLine("Answer was correct!!!!");
                     _purses[_currentPlayer]++;
-                    Console.WriteLine(_players[_currentPlayer]
+                    Console.WriteLine(_player[_currentPlayer]
                             + " now has "
                             + _purses[_currentPlayer]
                             + " Gold Coins.");
 
                     var winner = DidPlayerWin();
                     _currentPlayer++;
-                    if (_currentPlayer == _players.Count) _currentPlayer = 0;
+                    if (_currentPlayer == _player.Count) _currentPlayer = 0;
 
                     return winner;
                 }
                 else
                 {
                     _currentPlayer++;
-                    if (_currentPlayer == _players.Count) _currentPlayer = 0;
+                    if (_currentPlayer == _player.Count) _currentPlayer = 0;
                     return true;
                 }
             }
@@ -167,31 +184,32 @@ namespace Trivia
             {
                 Console.WriteLine("Answer was corrent!!!!");
                 _purses[_currentPlayer]++;
-                Console.WriteLine(_players[_currentPlayer]
+                Console.WriteLine(_player[_currentPlayer]
                         + " now has "
                         + _purses[_currentPlayer]
                         + " Gold Coins.");
 
                 var winner = DidPlayerWin();
                 _currentPlayer++;
-                if (_currentPlayer == _players.Count) _currentPlayer = 0;
+                if (_currentPlayer == _player.Count) _currentPlayer = 0;
 
                 return winner;
             }
         }
 
+        //Place le joueur dans la case "Penalty Box" et passe au joueur suivant
         public bool WrongAnswer()
         {
             Console.WriteLine("Question was incorrectly answered");
-            Console.WriteLine(_players[_currentPlayer] + " was sent to the penalty box");
+            Console.WriteLine(_player[_currentPlayer] + " was sent to the penalty box");
             _inPenaltyBox[_currentPlayer] = true;
 
             _currentPlayer++;
-            if (_currentPlayer == _players.Count) _currentPlayer = 0;
+            if (_currentPlayer == _player.Count) _currentPlayer = 0;
             return true;
         }
 
-
+        //Vérifie si le joueur a gagné en ayant accumulé six pièces d'or
         private bool DidPlayerWin()
         {
             return !(_purses[_currentPlayer] == 6);

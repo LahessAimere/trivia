@@ -4,6 +4,7 @@ namespace Trivia
 {
     public class GameRunner
     {
+    
         private static bool _notAWinner;
 
         public static void Main(string[] args)
@@ -29,6 +30,8 @@ namespace Trivia
                     _notAWinner = aGame.WasCorrectlyAnswered();
                 }
             } while (_notAWinner);
+
+            string u = Console.ReadLine();
         }
     }
 }
