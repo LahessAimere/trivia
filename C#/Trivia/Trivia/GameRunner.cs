@@ -8,6 +8,8 @@ namespace Trivia
 
         public static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to Trivia!");
+
             var aGame = new Game();
 
             aGame.Add("Chet");
@@ -29,6 +31,7 @@ namespace Trivia
                     _notAWinner = aGame.WasCorrectlyAnswered();
                 }
             } while (_notAWinner);
+            Console.WriteLine("The game is over.");
         }
     }
 }
