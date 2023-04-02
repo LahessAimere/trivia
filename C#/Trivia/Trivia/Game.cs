@@ -21,10 +21,13 @@ namespace Trivia
         private readonly LinkedList<string> _sportsQuestions = new LinkedList<string>();
         private readonly LinkedList<string> _rockQuestions = new LinkedList<string>();
 
+
+        int part = 6;
+
         public Game()
         {
             // Pour chaque question, ajouter une question à chaque liste
-            for (var i = 0; i < nbquestion; i++)
+            for (int i = 0; i < nbquestion; i++)
             {
                 _popQuestions.AddLast(CreateQuestion("Pop", i));
                 _scienceQuestions.AddLast((CreateQuestion("science", i)));
@@ -94,11 +97,6 @@ namespace Trivia
         //Permet de poser une question en fonction de la catégorie actuelle du joueur
         private void AskQuestion()
         {
-            if (CurrentCategory() == "Pop")
-            {
-
-            }
-
             switch (CurrentCategory())
             {
                 case "Pop":
@@ -158,7 +156,7 @@ namespace Trivia
                             + player.Purse
                             + " Gold Coins.");
 
-                    var winner = DidPlayerWin();
+                    bool winner = DidPlayerWin();
                     player = player.Nextplayer;
 
                     return winner;
@@ -178,7 +176,7 @@ namespace Trivia
                         + player.Purse
                         + " Gold Coins.");
 
-                var winner = DidPlayerWin();
+                bool winner = DidPlayerWin();
                 player = player.Nextplayer;
                 return winner;
             }
@@ -198,8 +196,8 @@ namespace Trivia
         //Vérifie si le joueur a gagné en ayant accumulé six pièces d'or
         private bool DidPlayerWin()
         {
-            return ! (player.Purse == 6);
-        }
+            return ! (player.Purse == part);
+        }   
     }
 
 }
