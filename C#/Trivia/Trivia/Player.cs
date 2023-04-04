@@ -10,6 +10,7 @@ namespace Trivia
         int place = 0;
         int purse = 0;
         bool inPenaltyBox = false;
+        private bool isGettingOutOfPenaltyBox = false;
         Player nextPlayer;
 
         public Player(String name)
@@ -57,6 +58,13 @@ namespace Trivia
         {
             get { return inPenaltyBox; }
             set { inPenaltyBox = value; }
+        }
+
+        //the number of players in penalty
+        public bool IsGettingOutOfPenaltyBox
+        {
+            get { return isGettingOutOfPenaltyBox; }
+            set { isGettingOutOfPenaltyBox = value; }
         }
     }
 }

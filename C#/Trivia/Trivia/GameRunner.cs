@@ -8,13 +8,15 @@ namespace Trivia
 
         public static void Main(string[] args)
         {
-            var aGame = new Game();
+            Console.WriteLine("Welcome to Trivia!");
+
+            Game aGame = new Game();
 
             aGame.Add("Chet");
             aGame.Add("Pat");
             aGame.Add("Sue");
 
-            var rand = new Random();
+            Random rand = new Random();
 
             do
             {
@@ -29,6 +31,7 @@ namespace Trivia
                     _notAWinner = aGame.WasCorrectlyAnswered();
                 }
             } while (_notAWinner);
+            Console.WriteLine("The game is over.");
         }
     }
 }
