@@ -60,6 +60,7 @@ namespace Trivia
             set { inPenaltyBox = value; }
         }
 
+        //the number of players in penalty
         public bool IsGettingOutOfPenaltyBox
         {
             get { return isGettingOutOfPenaltyBox; }
